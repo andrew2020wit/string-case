@@ -1,5 +1,55 @@
-<div class="content">
+<mat-card class="content">
   <div class="input">
-
+    <mat-form-field appearance="outline">
+      <mat-label>Put string here</mat-label>
+      <input matInput [formControl]="inputFormControl">
+    </mat-form-field>
   </div>
-</div>
+
+  <div class="result">
+    <button mat-button color="primary"
+            [disabled]="!kebabCase"
+            (click)="copy(kebabCase)">copy
+    </button>
+    <div class="text">
+      {{kebabCase}}
+    </div>
+  </div>
+
+  <div class="result">
+    <button mat-button color="primary"
+            [disabled]="!camelCase"
+            (click)="copy(camelCase)">copy
+    </button>
+    <div class="text">
+      {{camelCase}}
+    </div>
+  </div>
+
+  <div class="result">
+    <button mat-button color="primary"
+            [disabled]="!upperCase"
+            (click)="copy(upperCase)">copy
+    </button>
+    <div class="text">
+      {{upperCase}}
+    </div>
+  </div>
+
+  <div class="result">
+    <button mat-button color="primary"
+            [disabled]="!pascalCase"
+            (click)="copy(pascalCase)">copy
+    </button>
+    <div class="text">
+      {{pascalCase}}
+    </div>
+  </div>
+
+  <br>
+
+  <div class="info">
+    kebab-case / camelCase / UPPER_CASE / PascalCase
+  </div>
+
+</mat-card>
