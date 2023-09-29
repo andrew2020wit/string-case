@@ -53,8 +53,8 @@ export class AppComponent implements OnInit {
       .split(' ')
       .forEach(s => {
         const sResult: string[] = [];
-        for (let i=0; i < s.length; i++) {
-          if (i > 0 && !this.isLowerCase(s[i]) && this.isLowerCase(s[i-1]) ) {
+        for (let i = 0; i < s.length; i++) {
+          if (i > 0 && !this.isLowerCase(s[i]) && this.isLowerCase(s[i - 1])) {
             sResult.push(' ');
           }
           sResult.push(s[i]);
@@ -76,9 +76,9 @@ export class AppComponent implements OnInit {
     this.pascalCase = this.textArray
       .map(x => x.toLowerCase())
       .map(s => {
-      const first = s[0].toUpperCase();
-      return first + s.slice(1)
-    })
+        const first = s[0].toUpperCase();
+        return first + s.slice(1)
+      })
       .join('')
 
     this.camelCase = this.pascalCase[0].toLowerCase() + this.pascalCase.slice(1);
