@@ -6,6 +6,21 @@
     </mat-form-field>
   </div>
 
+  <div class="original">
+    <div>Original: </div>
+
+    <button mat-button color="primary"
+            [disabled]="!inputFormControl.value"
+            (click)="copyOriginal()">
+      copy
+    </button>
+
+    <button mat-button color="primary"
+            (click)="paste()">
+      paste
+    </button>
+  </div>
+
   <div class="result">
     <button mat-button color="primary"
             [disabled]="!kebabCase"

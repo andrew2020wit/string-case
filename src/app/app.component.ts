@@ -47,7 +47,13 @@ export class AppComponent implements OnInit {
 
   private computeTextArray(text: string): void {
     const result: string[] = [];
-    text.replaceAll('-', ' ')
+    text
+      .replaceAll('.', '')
+      .replaceAll(',', '')
+      .replaceAll('!', '')
+      .replaceAll('?', '')
+      .replaceAll(';', '')
+      .replaceAll('-', ' ')
       .replaceAll('_', ' ')
       .replaceAll(/\s+/g, ' ')
       .split(' ')
@@ -82,5 +88,21 @@ export class AppComponent implements OnInit {
       .join('')
 
     this.camelCase = this.pascalCase[0].toLowerCase() + this.pascalCase.slice(1);
+  }
+
+  protected copyOriginal(): void {
+    const text = this.inputFormControl.value;
+
+    if (!text) {
+      return;
+    }
+
+    this.copy(text);
+  }
+
+  protected paste(): void {
+    window.navigator.clipboard.readText().then(text => {
+      this.inputFormControl.setValue(text);
+    })
   }
 }

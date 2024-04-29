@@ -20,3 +20,12 @@
   display: flex;
   align-items: center;
 }
+
+.original {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 8px;
+}
