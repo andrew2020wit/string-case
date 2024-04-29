@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   protected pascalCase = '';
   protected upperCase = '';
 
-
   private textArray: string[] = [];
 
   constructor(private matSnackBar: MatSnackBar) {
@@ -28,7 +27,24 @@ export class AppComponent implements OnInit {
 
   protected copy(text: string): void {
     window.navigator.clipboard.writeText(text);
+
     this.matSnackBar.open('Copied: ' + text, '', {duration: 1000, verticalPosition: "top"});
+  }
+
+  protected copyOriginal(): void {
+    const text = this.inputFormControl.value;
+
+    if (!text) {
+      return;
+    }
+
+    this.copy(text);
+  }
+
+  protected paste(): void {
+    window.navigator.clipboard.readText().then(text => {
+      this.inputFormControl.setValue(text);
+    })
   }
 
   private subscribeToInputFormControl(): void {
@@ -38,8 +54,10 @@ export class AppComponent implements OnInit {
         if (!text?.trim()) {
           this.textArray = [];
           this.computeStrings();
+
           return;
         }
+
         this.computeTextArray(text?.trim());
         this.computeStrings();
       })
@@ -59,12 +77,14 @@ export class AppComponent implements OnInit {
       .split(' ')
       .forEach(s => {
         const sResult: string[] = [];
+
         for (let i = 0; i < s.length; i++) {
           if (i > 0 && !this.isLowerCase(s[i]) && this.isLowerCase(s[i - 1])) {
             sResult.push(' ');
           }
           sResult.push(s[i]);
         }
+
         result.push(...sResult.join('').split(' '))
       });
 
@@ -88,21 +108,5 @@ export class AppComponent implements OnInit {
       .join('')
 
     this.camelCase = this.pascalCase[0].toLowerCase() + this.pascalCase.slice(1);
-  }
-
-  protected copyOriginal(): void {
-    const text = this.inputFormControl.value;
-
-    if (!text) {
-      return;
-    }
-
-    this.copy(text);
-  }
-
-  protected paste(): void {
-    window.navigator.clipboard.readText().then(text => {
-      this.inputFormControl.setValue(text);
-    })
   }
 }
